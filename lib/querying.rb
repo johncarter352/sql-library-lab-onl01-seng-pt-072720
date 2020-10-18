@@ -13,7 +13,8 @@ end
 
 
 def select_value_and_count_of_most_prolific_species
-  "SELECT species, COUNT (*) 
+  "SELECT species, 
+  COUNT (*) 
   FROM characters 
   GROUP BY species 
   ORDER BY COUNT (species) DESC LIMIT 1"
@@ -36,12 +37,17 @@ def select_series_title_with_most_human_characters
   ON character_books.book_id = books.id 
   JOIN characters ON character_books.character_id = characters.id 
   WHERE characters.species = 'human' 
-  GROUP BY series.title 
+  GROUP BY (series.title)
   ORDER BY COUNT(*) DESC LIMIT 1"
 end
 
 def select_character_names_and_number_of_books_they_are_in
-  "Write your SQL query here"
+  "SELECT characters.name, 
+  COUNT(*) as book_count from character_books 
+  JOIN characters 
+  ON character_books.character_id = characters.id 
+  GROUP BY (characters.name)
+  ORDER BY (book_count) DESC"
 end
 #INSERT INTO series (id, title, author_id, subgenre_id) VALUES (1, "A Song of Ice and Fire", 1, 1), (2, "Second Series", 2, 2);
 #INSERT INTO subgenres (id, name) VALUES (1, "medieval"), (2, "space opera");
